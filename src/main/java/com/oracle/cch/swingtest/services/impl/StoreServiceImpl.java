@@ -6,6 +6,10 @@
 
 package com.oracle.cch.swingtest.services.impl;
 
+import com.oracle.cch.swingtest.Repositories.impl.exceptions.NonexistentEntityException;
+import com.oracle.cch.swingtest.Repositories.impl.exceptions.PreexistingEntityException;
+import com.oracle.cch.swingtest.Respositories.ProductRepository;
+import com.oracle.cch.swingtest.entities.Product;
 import com.oracle.cch.swingtest.services.StoreService;
 
 /**
@@ -14,14 +18,36 @@ import com.oracle.cch.swingtest.services.StoreService;
  */
 public class StoreServiceImpl implements StoreService {
 
-    @Override
-    public void AddProduct() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private ProductRepository productRepository;
+
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
+   
 
     @Override
     public String SaidHello() {
         return "hello";
+    }
+
+    @Override
+    public void AddProduct(Product product) throws PreexistingEntityException, Exception {
+        productRepository.create(product);
+    }
+
+    @Override
+    public void DeleteProduct(Integer id) throws NonexistentEntityException {
+        productRepository.destroy(id);
+    }
+
+    @Override
+    public void UpdateProduct(Product product) throws NonexistentEntityException, Exception {
+        productRepository.edit(product);
+    }
+
+    @Override
+    public Product findProduct(Integer id) {
+        return productRepository.findProduct(id);
     }
     
 }

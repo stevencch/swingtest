@@ -6,7 +6,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 ">
+    <bean id="applicationContextProvder" class="com.oracle.cch.swingtest.common.ApplicationContextProvider"/>
     <bean name="storeService" class="com.oracle.cch.swingtest.services.impl.StoreServiceImpl">
-        
+        <property name="productRepository" ref="productRepository"></property>
+    </bean>
+    <bean name="productRepository" class="com.oracle.cch.swingtest.Repositories.impl.ProductRepositoryImpl">
+        <constructor-arg name="db" value="com.oracle.cch_swingtest_jar_1.0-SNAPSHOTPU"></constructor-arg>
     </bean>
 </beans>
