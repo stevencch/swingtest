@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.oracle.cch.swingtest;
 
 import com.oracle.cch.swingtest.entities.Product;
@@ -18,9 +17,10 @@ import java.util.logging.Logger;
 public class ProductForm extends javax.swing.JFrame {
 
     private Product product;
+
     ProductForm(Product product) {
         initComponents();
-        this.product=product;
+        this.product = product;
         txtName.setText(product.getName());
     }
 
@@ -33,6 +33,7 @@ public class ProductForm extends javax.swing.JFrame {
     }
 
     private StoreService storeService;
+
     /**
      * Creates new form ProductForm
      */
@@ -53,6 +54,7 @@ public class ProductForm extends javax.swing.JFrame {
         txtName = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +74,13 @@ public class ProductForm extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setLabel("Delete");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,10 +91,12 @@ public class ProductForm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(38, 38, 38)
-                        .addComponent(jButton2))
+                        .addComponent(jButton2)
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton3))
                     .addComponent(labId)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,7 +108,8 @@ public class ProductForm extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addContainerGap(174, Short.MAX_VALUE))
         );
 
@@ -110,32 +122,42 @@ public class ProductForm extends javax.swing.JFrame {
 
             product.setName(txtName.getText());
             storeService.UpdateProduct(product);
-            
-            
-        }
-        catch(Exception ex){
-            
+
+        } catch (Exception ex) {
+
         }
         this.setVisible(false);
-            this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try {
             // TODO add your handling code here:
-            Product p1=new Product();
+            Product p1 = new Product();
             p1.setName(txtName.getText());
             storeService.AddProduct(p1);
-            
-            
-        }
-        catch(Exception ex){
-            
+
+        } catch (Exception ex) {
+
         }
         this.setVisible(false);
-            this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+
+            storeService.DeleteProduct(product.getId());
+
+        } catch (Exception ex) {
+
+        }
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,6 +197,7 @@ public class ProductForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel labId;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables

@@ -3,29 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.oracle.cch.swingtest;
 
 import com.oracle.cch.swingtest.common.AppContext;
 import com.oracle.cch.swingtest.common.ApplicationContextProvider;
 import com.oracle.cch.swingtest.entities.Product;
 import com.oracle.cch.swingtest.services.StoreService;
+import java.awt.Dimension;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 
 /**
  *
  * @author chacao
  */
 public class MainJFrame extends javax.swing.JFrame implements ListSelectionListener {
-    
-    
-    
+
     public StoreService getStoreService() {
         return storeService;
     }
@@ -35,13 +42,13 @@ public class MainJFrame extends javax.swing.JFrame implements ListSelectionListe
     }
 
     private StoreService storeService;
-    
+
     /**
      * Creates new form MainJFrame
      */
     public MainJFrame() {
         initComponents();
-        ListSelectionModel model=jTable1.getSelectionModel();
+        ListSelectionModel model = jTable1.getSelectionModel();
         model.addListSelectionListener(this);
     }
 
@@ -67,6 +74,9 @@ public class MainJFrame extends javax.swing.JFrame implements ListSelectionListe
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,6 +108,31 @@ public class MainJFrame extends javax.swing.JFrame implements ListSelectionListe
             }
         });
 
+        jButton2.setLabel("refresh");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 420, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jButton4.setText("jButton4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,10 +146,15 @@ public class MainJFrame extends javax.swing.JFrame implements ListSelectionListe
                             .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(74, 74, 74)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(jButton3)))
-                .addContainerGap(73, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton3)
+                            .addComponent(jButton2)
+                            .addComponent(jButton4))))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,13 +163,21 @@ public class MainJFrame extends javax.swing.JFrame implements ListSelectionListe
                 .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jButton3)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                        .addGap(61, 61, 61)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton4)
+                        .addGap(0, 89, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         bindingGroup.bind();
@@ -144,8 +192,20 @@ public class MainJFrame extends javax.swing.JFrame implements ListSelectionListe
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        new ProductForm().setVisible(true);
+        ProductForm pf = new ProductForm();
+        pf.setStoreService(AppContext.getApplicationContext().getBean("storeService", StoreService.class));
+        pf.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        ((DefaultTableModel)jTable1.getModel()).fireTableDataChanged();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+       new ChartJFrame().setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,9 +216,9 @@ public class MainJFrame extends javax.swing.JFrame implements ListSelectionListe
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        
-        ApplicationContext appContext=new ClassPathXmlApplicationContext("applicationContext.xml");
-        
+
+        ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -180,9 +240,9 @@ public class MainJFrame extends javax.swing.JFrame implements ListSelectionListe
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
-                MainJFrame mj=new MainJFrame();
-                mj.storeService=AppContext.getApplicationContext().getBean("storeService",StoreService.class);
+
+                MainJFrame mj = new MainJFrame();
+                mj.storeService = AppContext.getApplicationContext().getBean("storeService", StoreService.class);
                 mj.setVisible(true);
             }
         });
@@ -191,7 +251,10 @@ public class MainJFrame extends javax.swing.JFrame implements ListSelectionListe
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private java.util.List<com.oracle.cch.swingtest.entities.Product> productList;
@@ -206,9 +269,13 @@ public class MainJFrame extends javax.swing.JFrame implements ListSelectionListe
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        TableModel model=jTable1.getModel();
-        Integer i=(Integer)model.getValueAt(jTable1.getSelectedRow(),1);
-        Product product=storeService.findProduct(i);
-        new ProductForm(product).setVisible(true);
+        if (!e.getValueIsAdjusting()) {
+            TableModel model = jTable1.getModel();
+            Integer i = (Integer) model.getValueAt(jTable1.getSelectedRow(), 1);
+            Product product = storeService.findProduct(i);
+            ProductForm pf = new ProductForm(product);
+            pf.setStoreService(AppContext.getApplicationContext().getBean("storeService", StoreService.class));
+            pf.setVisible(true);
+        }
     }
 }
