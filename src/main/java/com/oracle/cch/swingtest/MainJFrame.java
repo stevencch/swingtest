@@ -77,6 +77,7 @@ public class MainJFrame extends javax.swing.JFrame implements ListSelectionListe
         jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -133,6 +134,13 @@ public class MainJFrame extends javax.swing.JFrame implements ListSelectionListe
             }
         });
 
+        jButton5.setText("jButton5");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,7 +161,8 @@ public class MainJFrame extends javax.swing.JFrame implements ListSelectionListe
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton3)
                             .addComponent(jButton2)
-                            .addComponent(jButton4))))
+                            .addComponent(jButton4)
+                            .addComponent(jButton5))))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -171,7 +180,9 @@ public class MainJFrame extends javax.swing.JFrame implements ListSelectionListe
                         .addComponent(jButton2)
                         .addGap(37, 37, 37)
                         .addComponent(jButton4)
-                        .addGap(0, 89, Short.MAX_VALUE))
+                        .addGap(28, 28, 28)
+                        .addComponent(jButton5)
+                        .addGap(0, 36, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,6 +217,11 @@ public class MainJFrame extends javax.swing.JFrame implements ListSelectionListe
         // TODO add your handling code here:
        new ChartJFrame().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        new TableJFrame().setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,6 +270,7 @@ public class MainJFrame extends javax.swing.JFrame implements ListSelectionListe
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

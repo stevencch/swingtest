@@ -7,6 +7,7 @@
 package com.oracle.cch.swingtest;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -20,7 +21,7 @@ import org.jfree.data.xy.XYSeriesCollection;
  * @author Administrator
  */
 public class ChartJFrame extends javax.swing.JFrame {
-
+    private JFreeChart chart;
     /**
      * Creates new form ChartJFrame
      */
@@ -33,7 +34,7 @@ public class ChartJFrame extends javax.swing.JFrame {
         Goals.add(4, 0.0);
         Goals.add(5, 3.0);
         XYDataset xyDataset = new XYSeriesCollection(Goals);
-        JFreeChart chart = ChartFactory.createXYLineChart(
+        chart = ChartFactory.createXYLineChart(
             "Goals Scored Over Time", "Fixture Number", "Goals",
             xyDataset, PlotOrientation.VERTICAL, true, true, false);
         ChartPanel cp = new ChartPanel(chart) {
@@ -43,10 +44,16 @@ public class ChartJFrame extends javax.swing.JFrame {
                 return new Dimension(320, 240);
             }
         };
-        cp.setMouseWheelEnabled(true);
-        add(cp);
+        FlowLayout fl=new FlowLayout();
+        this.setLayout(fl);
+        this.add(cp);
+        
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
+    }
+    
+    public void showChart(){
+        
     }
 
     /**
@@ -104,7 +111,8 @@ public class ChartJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChartJFrame().setVisible(true);
+                ChartJFrame cj=new ChartJFrame();
+                cj.setVisible(true);
             }
         });
     }
